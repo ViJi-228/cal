@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="main.css">
+        <title>Калькуль</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400&display=swap" rel="stylesheet">
+    </head>
+    <body id="body">
+        <div class="paper">
+            <!-- <script>
+                body.onclick = null;
+            </script> -->
+            <div class="cal">
+                <div class="info" id="info">0</div>
+                <div class="but">
+                    <div id="but" class="line__but">
+                        <button id="c" class="allmargin c">C</button>
+                        <button id="delit" class="allmargin allb number">
+                            <img class="del" src="del.svg" alt="Del">
+                        </button>
+                        <button id="div" class="allmargin allb allbl number fun">÷</button>
+                    </div>
+                    <div class="line__but">
+                        <button id="7" class="allmargin allb number lol">7</button>
+                        <button id="8" class="allmargin allb number lol">8</button>
+                        <button id="9" class="allmargin allb number lol">9</button>
+                        <button id="mul" class="allmargin allb allbl number fun">×</button>
+                    </div>
+                    <div class="line__but">
+                        <button id="4" class="allmargin allb number lol">4</button>
+                        <button id="5" class="allmargin allb number lol">5</button>
+                        <button id="6" class="allmargin allb number lol">6</button>
+                        <button id="min"class="allmargin allb allbl number fun">–</button>
+                    </div>
+                    <div class="line__but">
+                        <button id="one" class="allmargin allb number lol">1</button>
+                        <button id="2" class="allmargin allb number lol">2</button>
+                        <button id="3" class="allmargin allb number lol">3</button>
+                        <button id="sum" class="allmargin allb allbl number fun">+</button>
+                    </div>
+                    <div class="line__but">
+                        <button id="0" class="allmargin allb one number lol">0</button>
+                        <button id="eq" class="allmargin allb allbl number">=</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="cod.js" async></script>
+    <script>
+        let number = document.querySelectorAll('.lol');
+        let infoLine = document.getElementById('info');
+        let clin = document.getElementById('c');
+        let delit = document.getElementById('delit');
+        let rev = number.length;
+        
+
+        let div = document.getElementById('div')
+        let mul = document.getElementById('mul')
+        let min = document.getElementById('min')
+        let sum = document.getElementById('sum')
+        let eq = document.getElementById('eq')
+
+        function sumNumber() {
+            for (let i = 0; 0 < number.length; i++) {
+                number[i].onclick = function() {
+                    infoLine.style.cssText = `font-size: 96px;`
+                    let str = infoLine.innerHTML
+
+                    // let size = infoLine.innerHTML;
+                    let one = str.slice(0,1);
+                        infoLine.innerHTML += this.innerHTML      
+                    if (one === '0'|| one ==='÷'||one ==='+' || one ==='–' || one ==='×') {
+                        infoLine.innerHTML = this.innerHTML
+                    }
+                    if (str.length > 4) {
+                        infoLine.style.cssText = `font-size: 56px;`
+                    }
+                    if (str.length > 8) {
+                        infoLine.style.cssText = `font-size: 40px;`
+                    }
+                }
+            }
+        }
+
+        clin.onclick = () => {
+            infoLine.innerHTML = '0'
+            infoLine.style.cssText = `font-size: 96px;`
+        }
+
+        delit.onclick = () => {
+            let str = infoLine.innerHTML
+            let delitLast = str.slice(0, -1)
+            
+            infoLine.innerHTML = delitLast;
+            if (infoLine.innerHTML.length > 4 & infoLine.innerHTML.length < 6) {
+                        infoLine.style.cssText = `font-size: 96px;`
+            }
+            if (infoLine.innerHTML.length > 6) {
+                        infoLine.style.cssText = `font-size: 56px;`
+            }
+            if (infoLine.innerHTML.length > 8) {
+                infoLine.style.cssText = `font-size: 40px;`
+            }
+            if (infoLine.innerHTML.length < 1) {
+                infoLine.innerHTML = '0'
+            }
+        }
+
+        let oneNum = ''
+        let twoNum = ''
+        let ifDiv = ''
+        let ifSum = ''
+        let ifMin = ''
+        let ifMul = ''
+        div.addEventListener('click', () => {
+                ifSum = ''
+                ifMin = ''
+                ifMul = ''
+                infoLine.style.cssText = `font-size: 96px;`
+                oneNum = infoLine.innerHTML;
+                infoLine.innerHTML = '÷';
+                ifDiv = infoLine.innerHTML;
+                sumNumber()
+        }
+        )
+
+        mul.addEventListener('click', () => {
+                ifDiv = ''
+                ifSum = ''
+                ifMin = ''
+                infoLine.style.cssText = `font-size: 96px;`
+                oneNum = infoLine.innerHTML;
+                infoLine.innerHTML = '×';
+                ifMul = infoLine.innerHTML;
+                sumNumber()
+        }
+        )
+
+        min.addEventListener('click', () => {
+                ifDiv = ''
+                ifSum = ''
+                ifMul = ''
+                infoLine.style.cssText = `font-size: 96px;`
+                oneNum = infoLine.innerHTML;
+                infoLine.innerHTML = '–';
+                ifMin = infoLine.innerHTML;
+                sumNumber()
+        }
+        )
+
+        sum.addEventListener('click', () => {
+                ifDiv = ''
+                ifMul = ''
+                ifMin = ''
+                infoLine.style.cssText = `font-size: 96px;`
+                oneNum = infoLine.innerHTML;
+                infoLine.innerHTML = '+';
+                ifSum =  infoLine.innerHTML;
+            
+                sumNumber()
+            }
+        )
+                
+        eq.addEventListener('click', () => {
+            twoNum = infoLine.innerHTML;
+            if(ifDiv) {
+                infoLine.innerHTML = +oneNum / +twoNum
+            }
+            if(ifSum) {
+                infoLine.innerHTML = +oneNum + +twoNum
+            } 
+            if(ifMul) {
+                infoLine.innerHTML = +oneNum * +twoNum
+            }
+            if(ifMin) {
+                infoLine.innerHTML = +oneNum - +twoNum
+            }  
+
+            if (infoLine.innerHTML.length > 4 & infoLine.innerHTML.length < 6) {
+                        infoLine.style.cssText = `font-size: 96px;`
+            }
+            if (infoLine.innerHTML.length > 6) {
+                        infoLine.style.cssText = `font-size: 56px;`
+            }
+            if (infoLine.innerHTML.length > 8) {
+                infoLine.style.cssText = `font-size: 40px;`
+            }
+            if (infoLine.innerHTML.length < 1) {
+                infoLine.innerHTML = '0'
+            }
+        })
+        
+
+        sumNumber()
+        calc()
+    </script>
+    </body>
+</html>
